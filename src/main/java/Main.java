@@ -15,7 +15,9 @@ public class Main {
         System.setProperty("webdriver.chrome.silentOutput", "true");
 
         //Create an instance of webdriver (ChromeDriver)
-        System.setProperty("webdriver.chrome.driver", "C:"+ File.separator +"Users"+ File.separator +"admin"+ File.separator +"Google Drive"+ File.separator +"stuff"+ File.separator +"software"+ File.separator +"webdriver browsers" + File.separator + "chromedriver.exe");
+        String OS_EXTENSION = (System.getProperty("os.name").toLowerCase().contains("win")) ? ".exe" : "_mac";
+        String DRIVER_PATH = "drivers/chromedriver" + OS_EXTENSION;
+        System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         WebDriver driver = new ChromeDriver();
         driver.manage().window().maximize();
 
