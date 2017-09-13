@@ -1,1 +1,6 @@
-.idea/workspace.xml
+*.html
+*.iml
+*.png
+.idea
+*.DS*
+target

@@ -19,7 +19,8 @@ public class Main {
         String DRIVER_PATH = "drivers/chromedriver" + OS_EXTENSION;
         System.setProperty("webdriver.chrome.driver", DRIVER_PATH);
         WebDriver driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        //driver.manage().window().maximize();
+        driver.manage().window().fullscreen();
 
         // Navigating to Salesforce instance
         driver.navigate().to("https://test.salesforce.com");
