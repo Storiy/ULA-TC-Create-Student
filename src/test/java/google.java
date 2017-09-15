@@ -1,21 +1,20 @@
 import annotations.TestName;
 import org.testng.annotations.Test;
-import pages.Gmail;
 import pages.LoginPage;
+import pages.MainPage;
 import utils.BaseTest;
 
 public class google extends BaseTest{
 
     @Test
-    @TestName(name = "Open gmail")
-    public void opengmail() throws Exception {
+    @TestName(name = "Create new student")
+    public void newstudent() throws Exception {
 
-        Gmail gmail = Gmail.Instance;
         LoginPage login = LoginPage.Instance;
+        MainPage main = MainPage.Instance;
 
         login.open();
         login.doLogin();
-        login.gmailPasswordfetch();
 
     }
 

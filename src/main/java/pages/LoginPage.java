@@ -1,20 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.JavascriptExecutor;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
-
-import java.awt.*;
-import java.awt.event.KeyEvent;
-import java.util.ArrayList;
-import java.util.List;
-
-
-import static org.apache.commons.lang3.SystemUtils.IS_OS_MAC;
 
 public class LoginPage extends BasePage{
 
@@ -37,7 +23,7 @@ public class LoginPage extends BasePage{
 
     // Page methods
 
-    public LoginPage doLogin() throws Exception {
+    public MainPage doLogin() throws Exception {
         findElement(usernameField).clear();
         findElement(usernameField).sendKeys(username);
 
@@ -45,38 +31,8 @@ public class LoginPage extends BasePage{
         findElement(passwordField).sendKeys(password);
 
         findElement(loginButton).click();
-        if ( isElementPresent(crmHome) ) {
-        } else { gmailPasswordfetch(); }
-        return this;
+        return MainPage.Instance;
     };
 
-    public boolean gmailAuthantication(){
-        return isElementPresent(gmailAuth);
-    }
 
-    public void gmailPasswordfetch() throws Exception {
-        reporter.info("Getting gmail password");
-//        Actions newTab = new Actions(driver());
-//        newTab.sendKeys(Keys.LEFT_CONTROL + "t").perform();
-        driver().get("https://www.facebook.com");
-        // If Mac OS X, the key combination is CMD+t, otherwise is CONTROL+t
-        int vkControl = IS_OS_MAC ? KeyEvent.VK_META : KeyEvent.VK_CONTROL;
-        Robot robot = new Robot();
-        robot.keyPress(vkControl);
-        robot.keyPress(KeyEvent.VK_T);
-        robot.keyRelease(vkControl);
-        robot.keyRelease(KeyEvent.VK_T);
-
-        // Wait up to 5 seconds to the second tab to be opened
-        WebDriverWait wait = new WebDriverWait(driver(), 5);
-        wait.until(ExpectedConditions.numberOfWindowsToBe(2));
-
-        // Switch to new tab
-        List<String> windowHandles = new ArrayList <> (driver().getWindowHandles());
-        System.err.println(windowHandles);
-        driver().switchTo().window(windowHandles.get(1));
-
-        // Open other URL in second tab
-        driver().get("https://google.com/");
-    }
 }
