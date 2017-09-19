@@ -15,8 +15,5 @@
             <AppenderRef ref="File"/>
             <AppenderRef ref="Console"/>
         </Root>
-      <!--  <logger level="info" name ="HowToKillDragon_HorsesGeroldsWeapon" additivity="false">
-            <AppenderRef ref="Console"/>
-        </logger> -->
     </Loggers>
 </Configuration>
