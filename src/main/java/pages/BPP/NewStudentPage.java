@@ -1,18 +1,23 @@
 package pages.BPP;
 
 import org.openqa.selenium.By;
-import pages.BasePage;
+
 import pages.MainPage;
+import utils.FileIO;
 import utils.Tools;
 
 import java.io.IOException;
+import java.util.Random;
 
 public class NewStudentPage extends MainPage {
 
     private static NewStudentPage instance;
     public static NewStudentPage Instance = (instance != null) ? instance : new NewStudentPage();
 
+
+
     // UI Mapping
+
     By firstname = By.id("name_firstacc2");
     By lastname = By.id("name_lastacc2");
     By studentType = By.id("00Nb0000003v7lc");
@@ -28,14 +33,30 @@ public class NewStudentPage extends MainPage {
     By saveButton = By.name("save");
 
     By addNewAddress = By.name("new00Nb0000004Lzej");
+    By addressType = By.id("00Nb0000004Lzeo");
+    By addressStreet = By.id("00Nb0000004Lzef");
+    By addressCity = By.id("00Nb0000004LzeZ");
+    By addressPostal = By.id("00Nb0000004Lzep");
+    By addressCountry = By.id("CF00Nb0000004Lzec");
+    By accountLink = By.id("CF00Nb0000004Lzej_ileinner");
+
+    By getProfileID = By.name("get_profile_id_v2");
+    By newOpportunity = By.name("newOpp");
+
+    public By profileIDField = By.id("00Nb0000004Lzfw_ileinner");
+
 
 
     // Page Methods
+
     public void enterStudentInfo() throws IOException {
-        findElement(firstname).sendKeys(firstname());
-        reporter.info("Entering firstname " + firstname());
-        findElement(lastname).sendKeys(lastname());
-        reporter.info("Entering lastname " + lastname());
+        String stfirst = firstname();
+        String stlast = lastname();
+
+        findElement(firstname).sendKeys(stfirst);
+        reporter.info("Entering firstname " + stfirst);
+        findElement(lastname).sendKeys(stlast);
+        reporter.info("Entering lastname " + stlast);
 
         reporter.info("Selecting user type, gender and birthday");
         selectFromDropdown(studentType, "Domestic");
@@ -46,9 +67,9 @@ public class NewStudentPage extends MainPage {
         selectFromDropdown(preferredPhone, "Home");
         findElement(homePhone).sendKeys(Tools.getCurTimeMillis(1000000000) + "158");
 
-        reporter.info("Entering email " + firstname() + "_" + lastname() + "@mailinator.com");
+        reporter.info("Entering email " + stfirst + "_" + stlast + "@mailinator.com");
         selectFromDropdown(preferredEmail, "Personal");
-        findElement(personalEmail).sendKeys(firstname() + "_" + lastname() + "@mailinator.com");
+        findElement(personalEmail).sendKeys(stfirst + "_" + stlast + "@mailinator.com");
 
         reporter.info("Setting Legal Entity");
         selectFromDropdown(legalEntity, "UC~COL");
@@ -58,6 +79,23 @@ public class NewStudentPage extends MainPage {
     }
 
     public void addNewAddress() throws IOException{
+        reporter.info("Adding Address");
+        findElement(addNewAddress).click();
 
+        selectFromDropdown(addressType, "Billing");
+        findElement(addressStreet).sendKeys(street() + " " + Tools.getCurTimeMillis(1000) + "/" + Tools.getCurTimeMillis(200));
+        findElement(addressCity).sendKeys("London");
+        findElement(addressPostal).sendKeys("PC-" + Tools.getCurTimeMillis(6000));
+        findElement(addressCountry).sendKeys("United Kingdom");
+
+        findElement(saveButton).click();
+        findElement(accountLink).click();
+        findElement(getProfileID).click();
     }
+
+    public NewOpportunityPage openNewOpportunityPage(){
+        findElement(newOpportunity).click();
+        return NewOpportunityPage.Instance;
+    }
+
 }

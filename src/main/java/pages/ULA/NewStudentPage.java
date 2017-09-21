@@ -2,8 +2,10 @@ package pages.ULA;
 
 import org.openqa.selenium.By;
 import pages.MainPage;
+import utils.FileIO;
 import utils.Tools;
 import java.io.IOException;
+import java.util.Random;
 
 public class NewStudentPage extends MainPage {
 
@@ -35,19 +37,24 @@ public class NewStudentPage extends MainPage {
 
     // Page methods
 
+
+
     public void enterStudentInfo() throws IOException {
-        findElement(firstname).sendKeys(firstname());
-        reporter.info("Entering firstname " + firstname());
-        findElement(lastname).sendKeys(lastname());
-        reporter.info("Entering lastname " + lastname());
+        String stfirst = firstname();
+        String stlast = lastname();
+
+        findElement(firstname).sendKeys(stfirst);
+        reporter.info("Entering firstname " + stfirst);
+        findElement(lastname).sendKeys(stlast);
+        reporter.info("Entering lastname " + stlast);
 
         reporter.info("Selecting user type, gender and birthday");
         selectFromDropdown(studentType, "Prospect");
         selectFromDropdown(gender, gender());
         findElement(birthday).sendKeys("02/02/1990");
 
-        reporter.info("Entering email " + firstname() + "_" + lastname() + "@mailinator.com");
-        findElement(email).sendKeys(firstname() + "_" + lastname() + "@mailinator.com");
+        reporter.info("Entering email " + stfirst + "_" + stlast + "@mailinator.com");
+        findElement(email).sendKeys(stfirst + "_" + stlast + "@mailinator.com");
 
         reporter.info("Entering mobile " + Tools.getCurTimeMillis(1000000000) + "158");
         selectFromDropdown(preferredPhone, "Mobile Phone");

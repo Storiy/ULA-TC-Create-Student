@@ -26,9 +26,20 @@ public class NewStudentBPP extends BaseTest{
 
         //Navigate to student creation page
         main.openNewStudentPage("BPP");
+
+        //Enter Student info and address
         student.enterStudentInfo();
-        //student.
+        student.addNewAddress();
 
+        Assert.assertFalse(student.profileIDField.toString().contains(null), "Failed to locate Profile ID");
 
+        //Navigate to opportunity creation page
+        student.openNewOpportunityPage();
+
+        //Add new opportunity
+        opp.addOpportinity();
+        opp.addProductCatalog();
+
+        Assert.assertFalse(opp.applicationIDField.toString().contains(null), "Failed to locate Application ID");
     }
 }

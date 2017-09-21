@@ -12,13 +12,15 @@ public class MainPage extends BasePage{
     private static MainPage instance;
     public static MainPage Instance = (instance != null) ? instance : new MainPage();
 
+
+
     // UI Mapping
 
     By accountsTab = By.xpath(".//*[@title='Accounts Tab']");
     By newAccountButton = By.xpath(".//*[@title='New']");
     By continueButton = By.xpath(".//*[@title='Continue']");
 
-    private String studentfirstname;
+
 
     // Page Methods
 
@@ -34,14 +36,15 @@ public class MainPage extends BasePage{
         return NewStudentPage.Instance;
     }
 
-    public String gender(){
+    public static String gender(){
         String [] gender = {"Male", "Female"};
         Random random = new Random();
         int index = random.nextInt(gender.length);
         return gender[index];
     }
 
-    public String firstname() throws IOException {
+    public static String firstname() throws IOException {
+        String studentfirstname = null;
         if (gender() == "Male") {
             studentfirstname = FileIO.readfromfile("firstname_f");
         }
@@ -51,12 +54,12 @@ public class MainPage extends BasePage{
         return studentfirstname;
     }
 
-    public String lastname() throws IOException {
+    public static String lastname() throws IOException {
         String studentlastname = FileIO.readfromfile("lastname");
         return studentlastname;
     }
 
-    public String street() throws IOException {
+    public static String street() throws IOException {
         String street = FileIO.readfromfile("street");
         return street;
     }
