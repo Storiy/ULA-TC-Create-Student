@@ -9,11 +9,11 @@ import utils.BaseTest;
 
 import static pages.BasePage.findElement;
 
-public class google extends BaseTest{
+public class NewStudentULA extends BaseTest{
 
     @Test
-    @TestName(name = "Create new student")
-    public void newstudent() throws Exception {
+    @TestName(name = "Create new ULA student")
+    public void newStudentULA() throws Exception {
 
         LoginPage login = LoginPage.Instance;
         MainPage main = MainPage.Instance;
@@ -22,10 +22,10 @@ public class google extends BaseTest{
 
         //Login to Salesforce
         login.open();
-        login.doLogin();
+        login.doLogin("ULA");
 
         //Navigate to student creation page
-        main.openNewStudentPage();
+        main.openNewStudentPage("");
 
         //Create new student account
         student.enterStudentInfo();

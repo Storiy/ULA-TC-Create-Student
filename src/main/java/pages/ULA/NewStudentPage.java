@@ -1,14 +1,11 @@
 package pages.ULA;
 
 import org.openqa.selenium.By;
-import pages.BasePage;
-import utils.FileIO;
+import pages.MainPage;
 import utils.Tools;
-
 import java.io.IOException;
-import java.util.Random;
 
-public class NewStudentPage extends BasePage {
+public class NewStudentPage extends MainPage {
 
     private static NewStudentPage instance;
     public static NewStudentPage Instance = (instance != null) ? instance : new NewStudentPage();
@@ -35,36 +32,8 @@ public class NewStudentPage extends BasePage {
 
     By newOpportunity = By.name("new_ula_traditional_opportunity");
 
-    private String studentfirstname;
-
 
     // Page methods
-    public String gender(){
-        String [] gender = {"Male", "Female"};
-        Random random = new Random();
-        int index = random.nextInt(gender.length);
-        return gender[index];
-    }
-
-    public String firstname() throws IOException {
-        if (gender() == "Male") {
-            studentfirstname = FileIO.readfromfile("firstname_f");
-        }
-        else if (gender() == "Female") {
-            studentfirstname =  FileIO.readfromfile("firstname_m");
-        }
-        return studentfirstname;
-    }
-
-    public String lastname() throws IOException {
-        String studentlastname = FileIO.readfromfile("lastname");
-        return studentlastname;
-    }
-
-    public String street() throws IOException {
-        String street = FileIO.readfromfile("street");
-        return street;
-    }
 
     public void enterStudentInfo() throws IOException {
         findElement(firstname).sendKeys(firstname());
@@ -91,7 +60,7 @@ public class NewStudentPage extends BasePage {
         findElement(addressPostal).sendKeys("ME" + Tools.getCurTimeMillis(6000));
         findElement(addressCountry).sendKeys("Mexico");
 
-        reporter.info("Clicking on Save");
+        reporter.info("Clicking on 'Save'");
         findElement(saveButton).click();
     }
 

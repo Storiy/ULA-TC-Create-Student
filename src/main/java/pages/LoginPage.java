@@ -17,12 +17,22 @@ public class LoginPage extends BasePage{
     By crmHome = By.id("tsid");
 
     // User credentials
-    String username = "apolloit.offshoretrad@gmail.com.qa";
-    String password = "Apollo2017";
+
 
     // Page methods
 
-    public MainPage doLogin(){
+    public MainPage doLogin( String university ){
+        String username = null;
+        String password = null;
+
+        if (university == "ULA"){
+            username = "apolloit.offshoretrad@gmail.com.qa";
+            password = "Apollo2017";
+        }
+        if (university == "BPP") {
+            username = "crmteamfusion@noah_crm_bpp.com.noahqa";
+            password = "Fusion12345";
+        }
         reporter.info("Logging into salesforce");
 
         findElement(usernameField).clear();

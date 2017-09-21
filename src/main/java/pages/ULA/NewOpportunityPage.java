@@ -2,7 +2,6 @@ package pages.ULA;
 
 import org.openqa.selenium.By;
 import pages.BasePage;
-import sun.jvm.hotspot.utilities.Assert;
 
 public class NewOpportunityPage extends BasePage{
 
