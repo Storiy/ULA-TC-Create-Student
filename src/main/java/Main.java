@@ -27,7 +27,7 @@ public class Main {
 
         // Logging in to Salesforce
         driver.findElement(By.id("username")).sendKeys("apolloit.offshoretrad@gmail.com.qa");
-        driver.findElement(By.id("password")).sendKeys("Apollo4000");
+        driver.findElement(By.id("password")).sendKeys("Apollo2017");
         driver.findElement(By.id("Login")).click();
         Thread.sleep(1000);
 

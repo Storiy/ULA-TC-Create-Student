@@ -5,6 +5,7 @@ import java.io.StringWriter;
 import java.io.Writer;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.Random;
 
 public class Tools {
 
@@ -20,4 +21,9 @@ public class Tools {
         return sdf.format(new Date(System.currentTimeMillis()));
     }
 
+    public static int getCurTimeMillis(int bound){
+        Random randNum = new Random(System.currentTimeMillis());
+        int randomNumber = randNum.nextInt(bound);
+        return randomNumber;
+    }
 }

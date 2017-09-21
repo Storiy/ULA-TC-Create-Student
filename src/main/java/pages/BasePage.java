@@ -12,7 +12,7 @@ import java.util.List;
 
 public class BasePage {
 
-    static ReporterManager reporter = ReporterManager.Instance;
+    protected static ReporterManager reporter = ReporterManager.Instance;
 
     public final static String BASE_URL = (FileIO.getConfigProperty("Environment"));
 
@@ -24,6 +24,8 @@ public class BasePage {
     public static final int DEFAULT_TIMEOUT = getTimeout();
     public static final int SHORT_TIMEOUT = getShortTimeout();
     public static final int STATIC_TIMEOUT =  getStaticTimeout();
+
+    String parentHandle = driver().getWindowHandle();
 
     private static int getTimeout() {
         String timeout = FileIO.getConfigProperty("DefaultTimeoutInSeconds");
@@ -294,7 +296,7 @@ public class BasePage {
     }
 
     public static void waitForPageToLoad() {
-        sleepFor(STATIC_TIMEOUT); // todo fixme
+        sleepFor(STATIC_TIMEOUT);
         ExpectedCondition<Boolean> expectation = new ExpectedCondition<Boolean>() {
 
             public Boolean apply(WebDriver driver) {
@@ -356,6 +358,19 @@ public class BasePage {
     public void switchToDefaultContent(){
         reporter.info("Switch to default content");
         driver().switchTo().defaultContent();
+    }
+
+    public void switchToNewTab(){
+        reporter.info("Switching to new tab");
+        for (String childHandle : driver().getWindowHandles()) {
+            if (!childHandle.equals(parentHandle))
+            {driver().switchTo().window(childHandle); }
+        }
+    }
+
+    public void switchToMainTab(){
+        reporter.info("Switching to main tab");
+        driver().switchTo().window(parentHandle);
     }
 
 }

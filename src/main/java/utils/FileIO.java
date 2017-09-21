@@ -1,15 +1,16 @@
 package utils;
 
+import com.sun.tools.javac.util.List;
 import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Properties;
+import java.util.Random;
+import java.util.Scanner;
 
 public class FileIO {
 
@@ -66,6 +67,20 @@ public class FileIO {
 
     public static String getDataFile(String filename){
             return DATA_RESOURCES + filename;
+    }
+
+    public static String readfromfile(String path) throws IOException{
+        Scanner inFile = new Scanner(new File(DATA_RESOURCES + path)).useDelimiter(",");
+        ArrayList<String> tokens = new ArrayList<String>();
+        while (inFile.hasNext()){
+            String name = inFile.next();
+            tokens.add(name);
+        }
+        inFile.close();
+        String [] tokensArray = tokens.toArray(new String[0]);
+        Random random = new Random();
+        int index = random.nextInt(tokensArray.length);
+        return tokensArray[index].replaceAll("[\\s,]","");
     }
 
 }

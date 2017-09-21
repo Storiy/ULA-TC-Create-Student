@@ -14,7 +14,6 @@ public class LoginPage extends BasePage{
     By usernameField = By.id("username");
     By passwordField = By.id("password");
     By loginButton = By.id("Login");
-    By gmailAuth = By.xpath("kajsiuasdhahdskajhsdkjahsdkj"); // todo
     By crmHome = By.id("tsid");
 
     // User credentials
@@ -23,7 +22,9 @@ public class LoginPage extends BasePage{
 
     // Page methods
 
-    public MainPage doLogin() throws Exception {
+    public MainPage doLogin(){
+        reporter.info("Logging into salesforce");
+
         findElement(usernameField).clear();
         findElement(usernameField).sendKeys(username);
 
