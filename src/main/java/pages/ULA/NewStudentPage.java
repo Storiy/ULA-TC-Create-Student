@@ -93,7 +93,6 @@ public class NewStudentPage extends BasePage {
 
         reporter.info("Clicking on Save");
         findElement(saveButton).click();
-
     }
 
     public NewOpportunityPage openNewOpportunityPage(){

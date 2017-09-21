@@ -1,7 +1,6 @@
 package pages;
 
 import org.openqa.selenium.By;
-import pages.ULA.NewOpportunityPage;
 import pages.ULA.NewStudentPage;
 
 public class MainPage extends BasePage{

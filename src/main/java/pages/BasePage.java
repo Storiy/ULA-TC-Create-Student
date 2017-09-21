@@ -364,7 +364,7 @@ public class BasePage {
         reporter.info("Switching to new tab");
         for (String childHandle : driver().getWindowHandles()) {
             if (!childHandle.equals(parentHandle))
-            {driver().switchTo().window(childHandle); }
+            {driver().switchTo().window(childHandle);}
         }
     }
 
