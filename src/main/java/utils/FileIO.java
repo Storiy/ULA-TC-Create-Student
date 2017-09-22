@@ -108,7 +108,7 @@ public class FileIO {
 
     public static ArrayList<String> array = createArray();
 
-    public static ArrayList<String> createFileFromArray(String studentinfo) {
+    public static ArrayList<String> addStudentToArray(String studentinfo) {
         array.add(studentinfo);
         return array;
     }

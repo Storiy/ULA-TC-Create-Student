@@ -99,10 +99,11 @@ public class NewOpportunityPage extends BasePage{
 
         reporter.info("Submitting Application");
         findElement(submitButton).click();
+        Thread.sleep(5000);
 
         reporter.info("Provisioning Student");
         findElement(provisionButton).click();
-        Thread.sleep(5000);
+        Thread.sleep(10000);
 
         getOpportunityLink();
         getBannerID();
@@ -122,7 +123,7 @@ public class NewOpportunityPage extends BasePage{
         String studentLink = NewStudentPage.studentLink;
         studentinfo = studentname + " " + studentLink + " " + bannerID + " " + opportunityLink;
         reporter.info(studentname + " " + studentLink + " " + bannerID + " " + opportunityLink);
-        FileIO.createFileFromArray(studentinfo);
+        FileIO.addStudentToArray(studentinfo);
         FileIO.createTextFile("test", FileIO.array);
     }
 }
