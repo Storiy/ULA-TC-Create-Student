@@ -4,12 +4,11 @@ import org.apache.commons.io.FileUtils;
 import org.openqa.selenium.OutputType;
 import org.openqa.selenium.TakesScreenshot;
 import org.openqa.selenium.WebDriver;
+import pages.ULA.NewOpportunityPage;
+import pages.ULA.NewStudentPage;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Properties;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class FileIO {
 
@@ -17,6 +16,7 @@ public class FileIO {
     static String DATA_RESOURCES = "src/main/resources/data/";
     static String CONFIG_FILE = System.getProperty("config");
     static String PROPERTIES = "src/main/resources/" + (( CONFIG_FILE == null ) ? "default" : CONFIG_FILE) + ".properties";
+    static String STUDENTS = "target/Students/";
 
     public static String getConfigProperty(String fieldName){
         String fileLocation = PROPERTIES;
@@ -80,6 +80,37 @@ public class FileIO {
         Random random = new Random();
         int index = random.nextInt(tokensArray.length);
         return tokensArray[index].replaceAll("[\\s,]","");
+    }
+
+    public static void createTextFile(String university, ArrayList<String> array){
+        try {
+            File statText = new File(STUDENTS + university + "_" + Tools.getCurDateTime() + ".txt");
+            FileOutputStream is = new FileOutputStream(statText);
+            OutputStreamWriter osw = new OutputStreamWriter(is);
+            Writer w = new BufferedWriter(osw);
+            for (int i=0; i<array.size(); i++){
+                String str = array.get(i).toString();
+                w.write(str);
+                if ( i < array.size()-1){
+                    w.write("\n");
+                }
+            }
+            w.close();
+        } catch (IOException e) {
+            ReporterManager.Instance.fail("Failed to write file");
+        }
+    }
+
+    public static ArrayList<String> createArray(){
+        ArrayList <String> array = new ArrayList<String>();
+        return array;
+    }
+
+    public static ArrayList<String> array = createArray();
+
+    public static ArrayList<String> createFileFromArray(String studentinfo) {
+        array.add(studentinfo);
+        return array;
     }
 
 }

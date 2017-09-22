@@ -2,20 +2,22 @@ package pages.ULA;
 
 import org.openqa.selenium.By;
 import pages.MainPage;
-import utils.FileIO;
 import utils.Tools;
 import java.io.IOException;
-import java.util.Random;
 
 public class NewStudentPage extends MainPage {
 
     private static NewStudentPage instance;
     public static NewStudentPage Instance = (instance != null) ? instance : new NewStudentPage();
 
+    public static String studentname = "";
+    public static String studentLink = "";
+
 
     // UI Mapping
     By firstname = By.id("name_firstacc2");
     By lastname = By.id("name_lastacc2");
+    By getName = By.id("acc2_ileinner");
 
     By studentType = By.id("00NE0000000cqG8");
     By birthday = By.id("00NE0000000dOMX");
@@ -40,21 +42,22 @@ public class NewStudentPage extends MainPage {
 
 
     public void enterStudentInfo() throws IOException {
-        String stfirst = firstname();
-        String stlast = lastname();
+        gender();
+        firstname();
+        lastname();
 
-        findElement(firstname).sendKeys(stfirst);
-        reporter.info("Entering firstname " + stfirst);
-        findElement(lastname).sendKeys(stlast);
-        reporter.info("Entering lastname " + stlast);
+        findElement(firstname).sendKeys(studentfirstname);
+        reporter.info("Entering firstname " + studentfirstname);
+        findElement(lastname).sendKeys(studentlastname);
+        reporter.info("Entering lastname " + studentlastname);
 
         reporter.info("Selecting user type, gender and birthday");
         selectFromDropdown(studentType, "Prospect");
         selectFromDropdown(gender, gender());
         findElement(birthday).sendKeys("02/02/1990");
 
-        reporter.info("Entering email " + stfirst + "_" + stlast + "@mailinator.com");
-        findElement(email).sendKeys(stfirst + "_" + stlast + "@mailinator.com");
+        reporter.info("Entering email " + studentfirstname + "_" + studentlastname + "@mailinator.com");
+        findElement(email).sendKeys(studentfirstname + "_" + studentlastname + "@mailinator.com");
 
         reporter.info("Entering mobile " + Tools.getCurTimeMillis(1000000000) + "158");
         selectFromDropdown(preferredPhone, "Mobile Phone");
@@ -69,6 +72,17 @@ public class NewStudentPage extends MainPage {
 
         reporter.info("Clicking on 'Save'");
         findElement(saveButton).click();
+
+        studentName();
+        studentLink();
+    }
+
+    public String studentName(){
+        return studentname = findElement(getName).getText().toString();
+    }
+
+    public String studentLink(){
+        return studentLink = driver().getCurrentUrl();
     }
 
     public NewOpportunityPage openNewOpportunityPage(){

@@ -20,12 +20,16 @@ public class MainPage extends BasePage{
     By newAccountButton = By.xpath(".//*[@title='New']");
     By continueButton = By.xpath(".//*[@title='Continue']");
 
+    public String studentfirstname = "";
+    public String studentlastname = "";
+
 
 
     // Page Methods
 
-    public NewStudentPage openNewStudentPage(String university){
+    public NewStudentPage openNewStudentPage(String university) throws InterruptedException {
         reporter.info("Opening student creation page");
+        Thread.sleep(2000);
         findElement(accountsTab).click();
         findElement(newAccountButton).click();
 
@@ -43,20 +47,17 @@ public class MainPage extends BasePage{
         return gender[index];
     }
 
-    public static String firstname() throws IOException {
-        String studentfirstname = null;
+    public void firstname() throws IOException {
         if (gender() == "Male") {
-            studentfirstname = FileIO.readfromfile("firstname_f");
+            studentfirstname = FileIO.readfromfile("firstname_m");
         }
         else if (gender() == "Female") {
-            studentfirstname =  FileIO.readfromfile("firstname_m");
+            studentfirstname =  FileIO.readfromfile("firstname_f");
         }
-        return studentfirstname;
     }
 
-    public static String lastname() throws IOException {
-        String studentlastname = FileIO.readfromfile("lastname");
-        return studentlastname;
+    public void lastname() throws IOException {
+        studentlastname = FileIO.readfromfile("lastname");
     }
 
     public static String street() throws IOException {

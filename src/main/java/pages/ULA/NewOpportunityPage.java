@@ -2,11 +2,19 @@ package pages.ULA;
 
 import org.openqa.selenium.By;
 import pages.BasePage;
+import utils.FileIO;
+
+import java.util.concurrent.TimeUnit;
 
 public class NewOpportunityPage extends BasePage{
 
     private static NewOpportunityPage instance;
     public static NewOpportunityPage Instance = (instance != null) ? instance : new NewOpportunityPage();
+
+    public String bannerID = "";
+    public String opportunityLink = "";
+    public String studentinfo = "";
+
 
     // UI Mapping
     By closeDate = By.xpath("//*[@class='dateFormat']"); //todo could be an issue
@@ -31,6 +39,7 @@ public class NewOpportunityPage extends BasePage{
     By provisionButton = By.name("student_provision");
 
     public By statusVerification = By.id("opp11_ileinner");
+    By bannerIDField = By.id("00NE0000000dOOW_ileinner");
 
 
 
@@ -80,7 +89,7 @@ public class NewOpportunityPage extends BasePage{
         switchToMainTab();
     }
 
-    public void submitOpportunity(){
+    public void submitOpportunity() throws InterruptedException {
         waitForPageToLoad();
         reporter.info("Changing Opportunity Status");
         findElement(editButton).click();
@@ -93,6 +102,27 @@ public class NewOpportunityPage extends BasePage{
 
         reporter.info("Provisioning Student");
         findElement(provisionButton).click();
+        Thread.sleep(5000);
+
+        getOpportunityLink();
+        getBannerID();
+        report();
     }
 
+    public String getBannerID(){
+        return bannerID = findElement(bannerIDField).getText();
+    }
+
+    public String getOpportunityLink() {
+        return opportunityLink = driver().getCurrentUrl();
+    }
+
+    private void report(){
+        String studentname = NewStudentPage.studentname;
+        String studentLink = NewStudentPage.studentLink;
+        studentinfo = studentname + " " + studentLink + " " + bannerID + " " + opportunityLink;
+        reporter.info(studentname + " " + studentLink + " " + bannerID + " " + opportunityLink);
+        FileIO.createFileFromArray(studentinfo);
+        FileIO.createTextFile("test", FileIO.array);
+    }
 }

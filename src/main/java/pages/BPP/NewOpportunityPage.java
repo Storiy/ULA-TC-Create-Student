@@ -15,34 +15,37 @@ public class NewOpportunityPage extends NewStudentPage {
 
     By saveButton = By.name("save");
     By opportunityName = By.id("opp3");
+    By accountName = By.id("opp4");
     By status = By.id("opp11");
     By customerGroup = By.id("00Ng0000001MZHo");
-    By closeDate = By.xpath("//*[@class='dateFormat']");
+    By closeDate = By.xpath("(//*[@class='dateFormat'])[0]");
     By sponsorshipLevel = By.id("00Nb0000009XrE0");
     By newProductCatalogItem = By.name("new00Nb0000009YxlB");
 
+    By continueButton = By.xpath("//INPUT[@value='Continue']");
     By offeringField = By.id("j_id0:searchForm:searchPageBlock:OfferingLookup");
     By searchButton = By.id("j_id0:searchForm:searchPageBlock:sBtn");
     By offeringCheckbox = By.xpath("(//input[@type='checkbox'])[1]");
     By addProductsButton = By.name("j_id0:searchForm:j_id77:j_id78:j_id79");
 
-    public By applicationIDField = By.id("00Nb0000003v7lg_ileinner");
-
 
 
     // Page Methods
 
-    public void addOpportinity() throws IOException{
+    public void addOpportinity() throws IOException, InterruptedException {
         reporter.info("Selecting 'Application' Record Type");
-        findElement(saveButton).click();
+        findElement(continueButton).click();
 
         reporter.info("Entering Opportunity Name");
-        findElement(opportunityName).sendKeys(firstname() + lastname());
+        findElement(opportunityName).sendKeys(findElement(accountName).getAttribute("value").toString().replaceAll("\\s", ""));
         selectFromDropdown(status, "Accepted - Conditional Firm");
         selectFromDropdown(customerGroup, "SELFFUND");
         findElement(closeDate).click();
         selectFromDropdown(sponsorshipLevel, "None");
+
+        reporter.info("Clicking 'Save'");
         findElement(saveButton).click();
+        Thread.sleep(2000);
     }
 
     public void addProductCatalog(){

@@ -6,6 +6,7 @@ import pages.MainPage;
 import pages.ULA.NewOpportunityPage;
 import pages.ULA.NewStudentPage;
 import utils.BaseTest;
+import utils.FileIO;
 
 import static pages.BasePage.findElement;
 
@@ -20,25 +21,29 @@ public class NewStudentULA extends BaseTest{
         NewStudentPage student = NewStudentPage.Instance;
         NewOpportunityPage opp = NewOpportunityPage.Instance;
 
+        String university = "ULA";
+
         //Login to Salesforce
         login.open();
-        login.doLogin("ULA");
+        login.doLogin(university);
 
-        //Navigate to student creation page
-        main.openNewStudentPage("");
+        for (int i = 0; i < 3; i++){
+            //Navigate to student creation page
+            main.openNewStudentPage("");
 
-        //Create new student account
-        student.enterStudentInfo();
+            //Create new student account
+            student.enterStudentInfo();
 
-        //Navigate to opportunity creation page
-        student.openNewOpportunityPage();
+            //Navigate to opportunity creation page
+            student.openNewOpportunityPage();
 
-        //Add new opportunity
-        opp.addOpportunity();
-        opp.addCatalogOptions();
-        opp.submitOpportunity();
+            //Add new opportunity
+            opp.addOpportunity();
+            opp.addCatalogOptions();
+            opp.submitOpportunity();
+        }
 
-        Assert.assertTrue( findElement(opp.statusVerification).getText().contains("Application Submitted"));
+        FileIO.createTextFile(university, FileIO.array);
     }
 
 }

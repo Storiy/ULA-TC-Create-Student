@@ -1,13 +1,12 @@
 package pages.BPP;
 
+import org.apache.regexp.RE;
 import org.openqa.selenium.By;
 
 import pages.MainPage;
-import utils.FileIO;
 import utils.Tools;
 
 import java.io.IOException;
-import java.util.Random;
 
 public class NewStudentPage extends MainPage {
 
@@ -38,7 +37,6 @@ public class NewStudentPage extends MainPage {
     By addressCity = By.id("00Nb0000004LzeZ");
     By addressPostal = By.id("00Nb0000004Lzep");
     By addressCountry = By.id("CF00Nb0000004Lzec");
-    By accountLink = By.id("CF00Nb0000004Lzej_ileinner");
 
     By getProfileID = By.name("get_profile_id_v2");
     By newOpportunity = By.name("newOpp");
@@ -49,14 +47,15 @@ public class NewStudentPage extends MainPage {
 
     // Page Methods
 
-    public void enterStudentInfo() throws IOException {
-        String stfirst = firstname();
-        String stlast = lastname();
+    public void enterStudentInfo() throws IOException, InterruptedException {
+        gender();
+        firstname();
+        lastname();
 
-        findElement(firstname).sendKeys(stfirst);
-        reporter.info("Entering firstname " + stfirst);
-        findElement(lastname).sendKeys(stlast);
-        reporter.info("Entering lastname " + stlast);
+        findElement(firstname).sendKeys(studentfirstname);
+        reporter.info("Entering firstname " + studentfirstname);
+        findElement(lastname).sendKeys(studentlastname);
+        reporter.info("Entering lastname " + studentlastname);
 
         reporter.info("Selecting user type, gender and birthday");
         selectFromDropdown(studentType, "Domestic");
@@ -67,18 +66,16 @@ public class NewStudentPage extends MainPage {
         selectFromDropdown(preferredPhone, "Home");
         findElement(homePhone).sendKeys(Tools.getCurTimeMillis(1000000000) + "158");
 
-        reporter.info("Entering email " + stfirst + "_" + stlast + "@mailinator.com");
+        reporter.info("Entering email " + studentfirstname + "_" + studentlastname + "@mailinator.com");
         selectFromDropdown(preferredEmail, "Personal");
-        findElement(personalEmail).sendKeys(stfirst + "_" + stlast + "@mailinator.com");
+        findElement(personalEmail).sendKeys(studentfirstname + "_" + studentlastname + "@mailinator.com");
 
         reporter.info("Setting Legal Entity");
         selectFromDropdown(legalEntity, "UC~COL");
 
         reporter.info("Clicking on 'Save'");
         findElement(saveButton).click();
-    }
 
-    public void addNewAddress() throws IOException{
         reporter.info("Adding Address");
         findElement(addNewAddress).click();
 
@@ -89,9 +86,14 @@ public class NewStudentPage extends MainPage {
         findElement(addressCountry).sendKeys("United Kingdom");
 
         findElement(saveButton).click();
-        findElement(accountLink).click();
+        findElement(By.partialLinkText(studentfirstname)).click();
+        Thread.sleep(1000);
+
+        reporter.info("Getting profile ID");
         findElement(getProfileID).click();
+        Thread.sleep(3000);
     }
+
 
     public NewOpportunityPage openNewOpportunityPage(){
         findElement(newOpportunity).click();
