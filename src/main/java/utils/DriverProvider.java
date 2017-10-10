@@ -7,7 +7,7 @@ import org.openqa.selenium.logging.LogType;
 import org.openqa.selenium.logging.LoggingPreferences;
 import org.openqa.selenium.remote.CapabilityType;
 import org.openqa.selenium.remote.DesiredCapabilities;
-import sun.security.krb5.internal.crypto.Des;
+
 
 import java.util.logging.Level;
 
@@ -16,7 +16,7 @@ public class DriverProvider {
     static String OS_EXTENSION = (System.getProperty("os.name").toLowerCase().contains("win")) ? ".exe" : "_mac";
     static String DRIVER_PATH = "drivers/chromedriver" + OS_EXTENSION;
 
-    public static ThreadLocal<WebDriver> instance = new ThreadLocal<>();
+    public static ThreadLocal<WebDriver> instance = new ThreadLocal<WebDriver>();
 
     static public ChromeDriver getChrome(){
 

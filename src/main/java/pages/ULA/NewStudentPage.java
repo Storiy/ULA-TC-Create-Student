@@ -46,10 +46,10 @@ public class NewStudentPage extends MainPage {
         firstname();
         lastname();
 
-        findElement(firstname).sendKeys(studentfirstname);
         reporter.info("Entering firstname " + studentfirstname);
-        findElement(lastname).sendKeys(studentlastname);
+        findElement(firstname).sendKeys(studentfirstname);
         reporter.info("Entering lastname " + studentlastname);
+        findElement(lastname).sendKeys(studentlastname);
 
         reporter.info("Selecting user type, gender and birthday");
         selectFromDropdown(studentType, "Prospect");

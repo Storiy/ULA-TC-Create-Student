@@ -110,9 +110,7 @@ public class NewOpportunityPage extends BasePage{
         report();
     }
 
-    public String getBannerID(){
-        return bannerID = findElement(bannerIDField).getText();
-    }
+    public String getBannerID(){ return bannerID = findElement(bannerIDField).getText(); }
 
     public String getOpportunityLink() {
         return opportunityLink = driver().getCurrentUrl();
@@ -124,6 +122,5 @@ public class NewOpportunityPage extends BasePage{
         studentinfo = studentname + " " + studentLink + " " + bannerID + " " + opportunityLink;
         reporter.info(studentname + " " + studentLink + " " + bannerID + " " + opportunityLink);
         FileIO.addStudentToArray(studentinfo);
-        FileIO.createTextFile("test", FileIO.array);
     }
 }

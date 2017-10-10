@@ -65,6 +65,7 @@ public class ReporterManager {
 
     public synchronized static void closeReporter() {
         getInstance().flush();
+        FileIO.createTextFile("suite", FileIO.array);
     }
 
     public String getTestName(Method m, Object[] data) {

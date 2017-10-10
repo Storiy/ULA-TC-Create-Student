@@ -13,12 +13,17 @@ public class NewStudentPage extends MainPage {
     private static NewStudentPage instance;
     public static NewStudentPage Instance = (instance != null) ? instance : new NewStudentPage();
 
+    public static String studentname = "";
+    public static String studentLink = "";
+
 
 
     // UI Mapping
 
     By firstname = By.id("name_firstacc2");
     By lastname = By.id("name_lastacc2");
+    By getName = By.id("acc2_ileinner");
+
     By studentType = By.id("00Nb0000003v7lc");
     By birthday = By.id("PersonBirthdate");
     By gender = By.id("00Nb0000003v7kV");
@@ -40,8 +45,6 @@ public class NewStudentPage extends MainPage {
 
     By getProfileID = By.name("get_profile_id_v2");
     By newOpportunity = By.name("newOpp");
-
-    public By profileIDField = By.id("00Nb0000004Lzfw_ileinner");
 
 
 
@@ -92,6 +95,17 @@ public class NewStudentPage extends MainPage {
         reporter.info("Getting profile ID");
         findElement(getProfileID).click();
         Thread.sleep(3000);
+
+        studentName();
+        studentLink();
+    }
+
+    public String studentName(){
+        return studentname = findElement(getName).getText().toString();
+    }
+
+    public String studentLink(){
+        return studentLink = driver().getCurrentUrl();
     }
 
 

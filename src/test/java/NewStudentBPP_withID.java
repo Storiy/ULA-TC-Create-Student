@@ -1,47 +1,38 @@
 import annotations.TestName;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+import pages.BPP.NewOpportunityPage;
+import pages.BPP.NewStudentPage;
 import pages.LoginPage;
 import pages.MainPage;
-import pages.ULA.NewOpportunityPage;
-import pages.ULA.NewStudentPage;
 import utils.BaseTest;
-import utils.FileIO;
 
-import static pages.BasePage.findElement;
-
-public class NewStudentULA extends BaseTest{
+public class NewStudentBPP_withID extends BaseTest{
 
     @Test (invocationCount = 20)
-    @TestName(name = "Create new ULA student")
-    public void newStudentULA() throws Exception {
+    @TestName(name = "Create new BPP student")
+    public void newStudentBPP() throws Exception {
 
         LoginPage login = LoginPage.Instance;
         MainPage main = MainPage.Instance;
         NewStudentPage student = NewStudentPage.Instance;
         NewOpportunityPage opp = NewOpportunityPage.Instance;
 
-        String university = "ULA";
-
         //Login to Salesforce
         login.open();
-        login.doLogin(university);
+        login.doLogin("BPP");
 
         //Navigate to student creation page
-        main.openNewStudentPage("");
+        main.openNewStudentPage("BPP");
 
-        //Create new student account
+        //Enter Student info and address
         student.enterStudentInfo();
 
         //Navigate to opportunity creation page
         student.openNewOpportunityPage();
 
         //Add new opportunity
-        opp.addOpportunity();
-        opp.addCatalogOptions();
-        opp.submitOpportunity();
-
+        opp.addOpportinity();
+        opp.addProductCataloggetBannerID();
 
     }
-
 }

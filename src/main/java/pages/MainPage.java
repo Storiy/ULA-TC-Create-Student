@@ -47,17 +47,25 @@ public class MainPage extends BasePage{
         return gender[index];
     }
 
-    public void firstname() throws IOException {
+    public String firstname() throws IOException {
         if (gender() == "Male") {
             studentfirstname = FileIO.readfromfile("firstname_m");
+            if (studentfirstname == null){
+                firstname();
+            }
+
         }
         else if (gender() == "Female") {
             studentfirstname =  FileIO.readfromfile("firstname_f");
+            if (studentfirstname == null){
+                firstname();
+            }
         }
+        return studentfirstname;
     }
 
-    public void lastname() throws IOException {
-        studentlastname = FileIO.readfromfile("lastname");
+    public String lastname() throws IOException {
+        return studentlastname = FileIO.readfromfile("lastname");
     }
 
     public static String street() throws IOException {

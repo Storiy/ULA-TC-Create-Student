@@ -1,17 +1,14 @@
 import annotations.TestName;
-import org.testng.Assert;
 import org.testng.annotations.Test;
-import pages.LoginPage;
-import pages.MainPage;
 import pages.BPP.NewOpportunityPage;
 import pages.BPP.NewStudentPage;
+import pages.LoginPage;
+import pages.MainPage;
 import utils.BaseTest;
 
-import static pages.BasePage.findElement;
+public class NewStudentBPP_noID extends BaseTest{
 
-public class NewStudentBPP extends BaseTest{
-
-    @Test
+    @Test (invocationCount = 1)
     @TestName(name = "Create new BPP student")
     public void newStudentBPP() throws Exception {
 

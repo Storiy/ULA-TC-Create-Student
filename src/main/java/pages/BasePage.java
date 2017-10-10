@@ -25,7 +25,7 @@ public class BasePage {
     public static final int SHORT_TIMEOUT = getShortTimeout();
     public static final int STATIC_TIMEOUT =  getStaticTimeout();
 
-    String parentHandle = driver().getWindowHandle();
+    String parentHandle;
 
     private static int getTimeout() {
         String timeout = FileIO.getConfigProperty("DefaultTimeoutInSeconds");
@@ -291,8 +291,7 @@ public class BasePage {
 
     public static void scrollToElement(WebElement element) {
         waitForPageToLoad();
-        ((JavascriptExecutor) driver()).executeScript("arguments[0].focus(); window.scroll(0, window.scrollY+=200)",element);
-
+        ((JavascriptExecutor) driver()).executeScript("arguments[0].scrollIntoView();", element);
     }
 
     public static void waitForPageToLoad() {
@@ -362,6 +361,7 @@ public class BasePage {
 
     public void switchToNewTab(){
         reporter.info("Switching to new tab");
+        parentHandle = driver().getWindowHandle();
         for (String childHandle : driver().getWindowHandles()) {
             if (!childHandle.equals(parentHandle))
             {driver().switchTo().window(childHandle);}
